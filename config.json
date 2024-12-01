@@ -1,0 +1,10 @@
+{
+  "browser-open-cmd": "firefox",
+  "dmenu-cmd": "wofi --show dmenu",
+  "dmenu-title-arg": "--prompt",
+  "dmenu-extra-arg": "",
+  "title-content": "Select Bookmark!",
+  "head-for-page": "",
+  "head-for-folder": "[T] ",
+  "search-engine-parh": "https://google.de/search?q="
+}
