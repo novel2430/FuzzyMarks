@@ -5,14 +5,16 @@ import os
 import shlex, subprocess
 import re
 import argparse
+from pathlib import Path
 
 # Default Val
 default_dmenu_cmd = "wofi --show dmenu" # Wofi
 default_dmenu_title_arg = ""
 default_dmenu_extra_arg = ""
 default_name = "FuzzyMarks"
-default_bookmark = "~/.config/{}/bookmarks.json".format(default_name)
-default_config = "~/.config/{}/config.json".format(default_name)
+home_dir = Path.home()
+default_bookmark = home_dir / ".config/{}/bookmarks.json".format(default_name)
+default_config = home_dir / ".config/{}/config.json".format(default_name)
 default_cmd_browser_open = "firefox"
 default_title_content = "Select Bookmark!"
 default_head_for_page = ""

@@ -3,8 +3,10 @@
 import argparse
 import json
 import os
+from pathlib import Path
 
-DEFAULT_PATH = "~/.config/FuzzyMarks/bookmarks.json"
+home_dir = Path.home()
+DEFAULT_PATH = home_dir / ".config/FuzzyMarks/bookmarks.json"
 
 # ANSI escape codes for colors
 GREEN = "\033[32m"
