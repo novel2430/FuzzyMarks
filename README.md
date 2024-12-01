@@ -26,8 +26,8 @@ This project is a bookmark management system that allows you to quickly search a
 
 ## Default Paths
 
-- **Configuration file (`config.json`)**: `~/.config/project-name/config.json`
-- **Bookmark file (`bookmarks.json`)**: `~/.config/project-name/bookmarks.json`
+- **Configuration file (`config.json`)**: `~/.config/FuzzyMarks/config.json`
+- **Bookmark file (`bookmarks.json`)**: `~/.config/FuzzyMarks/bookmarks.json`
 
 > **Tip:** Sample configuration and bookmark files are provided in the project. You can copy them to the default directory as follows:  
 > ```bash
