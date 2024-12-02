@@ -16,6 +16,10 @@ This project is a bookmark management system that allows you to quickly search a
 - Provides a command-line interface for adding or removing bookmarks and bookmark folders.  
 - Allows users to manage bookmarks and folder hierarchy with ease.
 
+### 3. **Bookmark Translate (`bookmarks-translate.py`)**
+- Easily convert the bookmarks from your current browser (Chrome-based or Firefox-based) for scripts to read.  
+- Therefore, there is little migration cost.
+
 ## Outputs
 ![img](./pics/002.png)
 ![img](./pics/003.png)
@@ -122,6 +126,73 @@ python3 bookmarks-editor.py del_folder 7
 ```
 - Delete folder `"7"`
 
+### 3. **Bookmark Translate (`bookmarks-translate.py`)**
+Parsing **Chrome** and **Firefox** bookmark files into FuzzyMarks JSON format and outputs the result to the terminal.  
+Users can specify the path to the bookmark file and the browser type for parsing. Additionally, if you want to save the output to a file, you can use piping.
+
+#### **Run Command**
+
+```bash
+python3 bookmarks-translate.py -f <bookmark_file_path> -t <browser_type>
+```
+
+#### **Options**
+
+| Option           | Description                                           | Type           | Example                                  |
+|--------------------|-------------------------------------------------------|----------------|------------------------------------------|
+| `-f`, `--file`     | Path to the bookmark JSON file                        | **Required**   | `/path/to/bookmarks.json`                |
+| `-t`, `--type`     | Browser type, either `chrome` or `firefox`            | **Required**   | `chrome` or `firefox`                    |
+
+#### **Examples**
+
+##### 1. **Parse Firefox Bookmarks:**
+```bash
+python script.py -f ~/Downloads/firefox_bookmarks.json -t firefox
+```
+
+##### 2. **Parse Chrome Bookmarks:**
+```bash
+python script.py -f ~/Downloads/Bookmarks -t chrome
+```
+
+#### **Chrome Bookmarks File Location**
+For **Chrome** and **Chrome-based browsers** (e.g., Edge, Brave, Opera), the bookmark file is usually located at:
+
+- **Windows**:  
+  `C:\Users\<User>\AppData\Local\Google\Chrome\User Data\Default\Bookmarks`
+  
+- **macOS**:  
+  `/Users/<User>/Library/Application Support/Google/Chrome/Default/Bookmarks`
+  
+- **Linux**:  
+  `/home/<User>/.config/google-chrome/Default/Bookmarks`
+
+Make sure to specify the correct file path for your system.
+
+#### **Firefox Bookmarks File Location**
+For **Firefox**, bookmarks are stored in a **JSON file** that you can export from the browser. To export the Firefox bookmarks as a JSON file:
+
+1. Open Firefox.
+2. Click on the **Library** button (the bookshelf icon).
+3. Choose **Bookmarks** > **Manage Bookmarks**.
+4. In the **Library** window, go to **Import and Backup** > **Backup**.
+5. Choose a location to save the **JSON** file.
+
+After exporting the bookmarks, you can use the tool to parse the JSON file.
+
+#### **Output to Terminal**
+By default, the output will be printed to the terminal in JSON format.
+
+#### **Output to File**
+If you wish to save the output to a file, you can use the following command to pipe the output:
+
+```bash
+python script.py -f ~/Downloads/bookmarks.json -t firefox > output.json
+```
+
+This will save the parsed bookmarks in the `output.json` file.
+
+
 ## Configuration File (`config.json`)
 
 An example `config.json` file:
@@ -157,6 +228,47 @@ You can simply remove any of the above options from `config.json` if you don't n
 If you type `How to fly` and presses **Enter** without selecting a bookmark, the script will open:  
 ```
 https://www.google.com/search?q=how+to+fly
+```
+
+### Example `config.json` for `dmenu`, `rofi`, ans `wofi`
+#### dmenu
+```json
+{
+  "browser-open-cmd": "qutebrowser",
+  "dmenu-cmd": "dmenu",
+  "dmenu-title-arg": "-p",
+  "dmenu-extra-arg": "-i",
+  "title-content": "Select Bookmark!",
+  "head-for-page": "",
+  "head-for-folder": "[T] ",
+  "search-engine-parh": "https://google.de/search?q="
+}
+```
+#### rofi
+```json
+{
+  "browser-open-cmd": "qutebrowser",
+  "dmenu-cmd": "rofi -dmenu",
+  "dmenu-title-arg": "-mesg",
+  "dmenu-extra-arg": "-i",
+  "title-content": "Select Bookmark!",
+  "head-for-page": "",
+  "head-for-folder": "[T] ",
+  "search-engine-parh": "https://google.de/search?q="
+}
+```
+#### wofi
+```json
+{
+  "browser-open-cmd": "qutebrowser",
+  "dmenu-cmd": "wofi --show dmenu",
+  "dmenu-title-arg": "--prompt",
+  "dmenu-extra-arg": "",
+  "title-content": "Select Bookmark!",
+  "head-for-page": "",
+  "head-for-folder": "[T] ",
+  "search-engine-parh": "https://google.de/search?q="
+}
 ```
 
 ## Understanding the `bookmarks.json` File
@@ -260,7 +372,7 @@ Work
 
 ## Help Information
 
-Both scripts (`bookmarks-selector.py` and `bookmarks-editor.py`) support the `-h` or `--help` options to display detailed usage information:
+All scripts support the `-h` or `--help` options to display detailed usage information:
 
 ```bash
 python3 bookmarks-selector.py -h
